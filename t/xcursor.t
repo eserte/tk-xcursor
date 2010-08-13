@@ -26,16 +26,16 @@ if (!$mw) {
     CORE::exit;
 }
 
-plan tests => 1;
+plan tests => 2;
 
 $mw->geometry('+10+10');
+diag "This display " . (Tk::Xcursor::SupportsARGB($mw) ? "supports" : "does not support") . " ARGB cursors";
 my $zzzfile = "$FindBin::RealBin/zzzcursor";
-my $xcursor = Tk::Xcursor::LoadCursor($mw, $zzzfile);
-#$xcursor->Define($mw);
-Tk::Xcursor::Define($xcursor, $mw);
-
+my $w = $mw->Label(-text => "The cursor is here", -fg => 'red')->pack;
+my $xcursor = Tk::Xcursor::LoadCursor($w, $zzzfile);
+isa_ok($xcursor, 'Tk::Xcursor', "$zzzfile loaded");
+ok($xcursor->Set($w), 'Defined cursor');
+$mw->after(2000, sub { $mw->destroy });
 MainLoop;
-
-pass("ok");
 
 __END__

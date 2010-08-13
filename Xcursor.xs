@@ -25,20 +25,34 @@ MODULE = Tk::Xcursor	PACKAGE = Tk::Xcursor
 
 PROTOTYPES: DISABLE
 
-Cursor
-LoadCursor(win, file)
-INPUT:
-    Tk_Window win;
-    const char *file;
+int
+SupportsARGB(Tk_Window tkwin)
 CODE:
-    RETVAL = XcursorFilenameLoadCursor(Tk_Display(win), file);
+    if (Tk_WindowId(tkwin) == None)
+        Tk_MakeWindowExist(tkwin);
+    RETVAL = XcursorSupportsARGB(Tk_Display(tkwin));
+OUTPUT:
+    RETVAL
+
+Cursor
+LoadCursor(Tk_Window tkwin, const char *file)
+CODE:
+    if (Tk_WindowId(tkwin) == None)
+        Tk_MakeWindowExist(tkwin);
+    RETVAL = XcursorFilenameLoadCursor(Tk_Display(tkwin), file);
 OUTPUT:
     RETVAL
 
 int
-Define(Cursor self, Tk_Window win)
+Set(Cursor self, Tk_Window tkwin)
 CODE:
-    RETVAL = XDefineCursor(Tk_Display(win), Tk_WindowId(win), self);
+    if (Tk_WindowId(tkwin) == None)
+        Tk_MakeWindowExist(tkwin);
+    RETVAL = XDefineCursor(Tk_Display(tkwin), Tk_WindowId(tkwin), self);
 OUTPUT:
     RETVAL
 
+BOOT:
+ {
+  IMPORT_VTABLES;
+ }
