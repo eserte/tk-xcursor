@@ -1,5 +1,6 @@
 /Makefile
 /Makefile.old
+/Tk-Xcursor-*/
 /Xcursor.bs
 /Xcursor.c
 /Xcursor.o
