@@ -1,6 +1,6 @@
 /Makefile
 /Makefile.old
-/Tk-Xcursor-*/
+/Tk-Xcursor-*.tar.gz
 /Xcursor.bs
 /Xcursor.c
 /Xcursor.o
