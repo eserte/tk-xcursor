@@ -19,7 +19,9 @@ EOF
     };
 }
 
-# XXX Should check rather if -lXcursor is available at all.
+use lib qw(inc);
+use Devel::CheckLib;
+check_lib_or_exit(lib => 'Xcursor');
 
 Tk::MMutil::TkExtMakefile(
 			  VERSION      => '0.02',
