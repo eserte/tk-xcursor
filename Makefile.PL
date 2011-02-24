@@ -7,16 +7,17 @@ if ($^O eq 'MSWin32') {
     exit 0;
 }
 
-eval {
-    if ((getpwuid($<))[0] eq 'eserte' && $ExtUtils::MakeMaker::VERSION < 6.54) {
-	warn <<EOF;
-**********************************************************************
-* WARNING:
-* ExtUtils::MakeMaker too old. META.yml will be imcomplete
-**********************************************************************
+my $eumm_recent_enough = $ExtUtils::MakeMaker::VERSION >= 6.54;
+
+if (!$eumm_recent_enough) {
+    *MY::dist_core = sub {
+	<<'EOF';
+dist :
+	$(NOECHO) $(ECHO) "Sorry, use a newer EUMM!"
+
 EOF
-    }
-};
+    };
+}
 
 # XXX Should check rather if -lXcursor is available at all.
 
@@ -27,7 +28,7 @@ Tk::MMutil::TkExtMakefile(
 			  OBJECT       => '$(O_FILES)',
 			  LIBS         => ['-lXcursor'],
 			  TYPEMAPS     => ['typemap'], # seems to be needed, why?
-			  ($ExtUtils::MakeMaker::VERSION >= 6.54 ?
+			  ($eumm_recent_enough ?
 			   (META_ADD => { resources => { repository => 'git://github.com/eserte/tk-xcursor.git' },
 					  configure_requires => {
 								 'Tk::MMutil' => 0,
