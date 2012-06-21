@@ -1,5 +1,8 @@
 Revision history for Perl extension Tk::Xcursor.
 
+0.02_50
+	- use Devel::Checklib
+
 0.02
 	- META.yml changes only (repository, configure_requires)
 
