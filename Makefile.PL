@@ -24,8 +24,8 @@ use Devel::CheckLib;
 check_lib_or_exit(lib => 'Xcursor');
 
 Tk::MMutil::TkExtMakefile(
-			  VERSION      => '0.02_50',
-			  XS_VERSION   => '0.02_50', # specify explicitely, other Tk's XS_VERSION is used
+			  VERSION      => '0.03',
+			  XS_VERSION   => '0.03', # specify explicitely, other Tk's XS_VERSION is used
 			  NAME         => 'Tk::Xcursor',
 			  OBJECT       => '$(O_FILES)',
 			  LIBS         => ['-lXcursor'],

@@ -3,7 +3,7 @@
 #
 # Author: Slaven Rezic
 #
-# Copyright (C) 2010,2012 Slaven Rezic. All rights reserved.
+# Copyright (C) 2010,2012,2014 Slaven Rezic. All rights reserved.
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.
 #
@@ -15,7 +15,7 @@ package Tk::Xcursor;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.02_50';
+$VERSION = '0.03';
 
 use base qw(DynaLoader);
 
