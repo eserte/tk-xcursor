@@ -9,6 +9,8 @@ perl:
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq xvfb twm libx11-dev libfreetype6-dev libxft-dev
+# need to install configure_requires manually
+ - cpanm --quiet --notest Tk::MMutil
  - Xvfb :123 &
  - (sleep 10; env DISPLAY=:123 twm) &
 env:
