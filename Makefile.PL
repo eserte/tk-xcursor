@@ -30,6 +30,7 @@ Tk::MMutil::TkExtMakefile(
 			  OBJECT       => '$(O_FILES)',
 			  LIBS         => ['-lXcursor'],
 			  TYPEMAPS     => ['typemap'], # seems to be needed, why?
+			  PREREQ_PM    => { Tk => 800.020 },
 			  ($eumm_recent_enough ?
 			   (META_ADD => { resources => { repository => 'git://github.com/eserte/tk-xcursor.git' },
 					  configure_requires => {
