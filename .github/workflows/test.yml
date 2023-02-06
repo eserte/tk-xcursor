@@ -36,7 +36,7 @@ jobs:
         WINDOW_MANAGER: ${{ matrix.window_manager }}
       run: |
         set -e
-        sudo apt-get install -qq --no-install-recommends cpanminus xvfb perl-tk $([ "$WINDOW_MANAGER" = "kwin" ] && echo -n "kwin-x11" || echo -n $WINDOW_MANAGER)
+        sudo apt-get install -qq --no-install-recommends cpanminus xvfb perl-tk $([ "$WINDOW_MANAGER" = "kwin" ] && echo -n "kwin-x11" || echo -n $WINDOW_MANAGER) libxcursor-dev
         cpanm --sudo --quiet --installdeps --notest . || ( cat ~/.cpanm/work/*/build.log; false )
     - name: Configure, Build and Test
       env:
@@ -71,7 +71,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: "build and test"
       run: |
-        apt-get update -qq && apt-get install -qq --no-install-recommends cpanminus xvfb libx11-dev libfreetype6-dev libxft-dev libpng-dev libz-dev libjpeg-dev twm
+        apt-get update -qq && apt-get install -qq --no-install-recommends cpanminus xvfb libx11-dev libfreetype6-dev libxft-dev libpng-dev libz-dev libjpeg-dev twm libxcursor-dev
         cpanm --quiet --installdeps --notest . || ( cat ~/.cpanm/work/*/build.log; false )
         Xvfb :123 &
         export DISPLAY=:123
